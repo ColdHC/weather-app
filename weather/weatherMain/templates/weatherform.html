@@ -1,0 +1,71 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<form method="POST" class="form-group">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label text-light">{{ field.label }}</label>
+            <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{ field.auto_id }}" class="form-control">
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-secondary">Submit</button>
+</form>
+
+<style>
+    .btn{
+        width: 100%;
+    }
+</style>
+{% if country %}
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Weather</h4>
+                </div>
+                <div class="card-body">
+                    <h1>Weather in {{city}}, {{country}}</h1>
+                    <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">Temperature: {{temperature}}°C</button>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">Description: {{description}}</button>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">Humidity: {{humidity}}%</button>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">UV Index: {{uv_index}}</button>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">Visibility: {{visibility}}</button>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">Wind Speed: {{wind_speed}} km/h</button>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">Precip: {{precip}}</button>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">Wind Direction: {{wind_dir}} hPa</button>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <button class="btn btn-secondary">Observation Time: {{observation_time}}</button>
+                        </div>
+                </div>
+{% endif %}
+
+
+                
+
+{%endblock%}
